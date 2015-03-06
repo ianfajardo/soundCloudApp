@@ -1,0 +1,12 @@
+{
+  "name": "soundCloudApp",
+  "app_id": "86147e96",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
