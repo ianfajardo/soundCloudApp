@@ -1,0 +1,8 @@
+<ion-view view-title="{{artist}}">
+  <ion-content style="text-align:center;">
+    <img ng-src="{{sc_image}}" ng-click="play()" style="width:100%;">
+    <button ng-click="play()" class="button button-full button-positive">{{play_name}}</button>
+    <button ng-click="replay()" class="button button-full button-positive">Replay</button>
+    <audio id="audio" ng-src="{{trustSrc(sc_uri)}}"></audio>
+  </ion-content>
+</ion-view>

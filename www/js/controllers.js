@@ -1,21 +1,13 @@
-// Ionic Starter App
+angular.module('starter.controllers', [])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+.controller('AppCtrl', function($scope){
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+})
+
+.controller('ContentCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };  
 })
 
 .controller('PlayCtrl', function($scope, $http, $sce){
@@ -28,10 +20,15 @@ angular.module('starter', ['ionic'])
   $scope.play_name = "Play";
   var image_uri = "";
 
-  $http.get('http://api.soundcloud.com/tracks/186823484.json?client_id=' + my_client_id).
+  $http.get('http://api.soundcloud.com/tracks/190701243.json?client_id=' + my_client_id).
   success(function(track) {
-    $scope.sc_image = (track.artwork_url + '?client_id=' + my_client_id).replace("large", "t500x500");
+    var song_image = track.artwork_url;
+    if(song_image == null){
+      song_image = track.user.avatar_url;
+    }
+    $scope.sc_image = (song_image + '?client_id=' + my_client_id).replace("large", "t500x500");
     $scope.sc_uri = track.stream_url + '?client_id=' + my_client_id;
+    $scope.artist = track.user.username;
   });
 
   $scope.play = function(){
